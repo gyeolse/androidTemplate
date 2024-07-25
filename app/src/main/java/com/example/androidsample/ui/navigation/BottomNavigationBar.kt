@@ -3,7 +3,6 @@ package com.example.androidsample.ui.navigation
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -28,7 +27,7 @@ import com.example.androidsample.ui.viewmodel.TodoViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun BottomNavigationBar(todoViewModel: TodoViewModel) {
+fun BottomNavigationBar() {
     // initialize the default selected item.
     var navigationSelectedItem by remember {
         mutableStateOf(0)
@@ -76,7 +75,7 @@ fun BottomNavigationBar(todoViewModel: TodoViewModel) {
                 HomeScreen(navController)
             }
             composable(ScreenInfo.Todo.route) {
-                TodoScreen(viewModel = todoViewModel)
+                TodoScreen(navController)
             }
             composable(ScreenInfo.Profile.route) {
                 ProfileScreen(navController)

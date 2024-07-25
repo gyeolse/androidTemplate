@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -71,7 +72,6 @@ dependencies {
     // Room
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
-
     kapt("androidx.room:room-compiler:2.6.1")
 
     // Navigation
@@ -81,6 +81,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     // Hilt
-    implementation(libs.hilt.android.gradle.plugin)
-    implementation(libs.androidx.hilt.lifecycle.viewmodel)
+    implementation(libs.hilt.android.v249)
+    kapt (libs.hilt.compiler.v247)
+    implementation(libs.androidx.hilt.navigation.compose.v100)
 }

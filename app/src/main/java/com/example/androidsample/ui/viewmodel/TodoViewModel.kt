@@ -4,13 +4,18 @@ import android.app.Application
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.androidsample.data.model.Todo
 import com.example.androidsample.domain.repository.TodoRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class TodoViewModel(application: Application, private val todoRepository: TodoRepository) :
-    AndroidViewModel(application) {
+@HiltViewModel
+class TodoViewModel @Inject constructor(
+    private val todoRepository: TodoRepository
+) : ViewModel() {
     private val _items = mutableStateOf(emptyList<Todo>())
     val items: State<List<Todo>> = _items
 

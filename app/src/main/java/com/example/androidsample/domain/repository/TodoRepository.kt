@@ -5,8 +5,9 @@ import androidx.room.Room
 import com.example.androidsample.data.datasource.database.TodoDatabase
 import com.example.androidsample.data.model.Todo
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class TodoRepository(application: Application) {
+class TodoRepository @Inject constructor(application: Application) {
     // application 을 넘겨받아야함.
     private val db = Room.databaseBuilder(
         application,

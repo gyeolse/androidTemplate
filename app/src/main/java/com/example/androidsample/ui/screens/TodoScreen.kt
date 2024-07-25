@@ -39,7 +39,9 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.androidsample.ui.component.TodoItem
 import com.example.androidsample.R
 import com.example.androidsample.ui.viewmodel.TodoViewModel
@@ -48,9 +50,7 @@ import kotlinx.coroutines.launch
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
-fun TodoScreen(
-    viewModel: TodoViewModel,
-) {
+fun TodoScreen(navController: NavController, viewModel: TodoViewModel = hiltViewModel()) {
     // Snackbar를 표시하기 위해서 ScaffoldState가 필요
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
