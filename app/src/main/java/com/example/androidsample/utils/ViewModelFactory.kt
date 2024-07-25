@@ -4,12 +4,11 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.androidsample.domain.repository.TodoRepository
-import com.example.androidsample.domain.repository.TodoRepositoryImpl
 import com.example.androidsample.ui.viewmodel.TodoViewModel
 
 class ViewModelFactory(
     private val application: Application,
-    private val repository: TodoRepository = TodoRepositoryImpl(application)
+    private val repository: TodoRepository = TodoRepository(application)
 ) :
     ViewModelProvider.AndroidViewModelFactory(application) {
 
