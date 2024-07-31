@@ -1,9 +1,15 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
 }
+
+var properties = Properties()
+properties.load(FileInputStream("local.properties"))
 
 android {
     namespace = "com.example.androidsample"
@@ -20,7 +26,15 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        buildConfigField("String", "KAKAO_API_KEY", properties.getProperty("KAKAO_API_KEY"))
+        resValue("string", "KAKAO_REDIRECT_URI", properties.getProperty("KAKAO_REDIRECT_URI"))
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
 
     buildTypes {
         release {
@@ -87,4 +101,10 @@ dependencies {
 
     // SplashScreen
     implementation(libs.androidx.core.splashscreen)
+
+    // Kakao API's
+    implementation("com.kakao.sdk:v2-user:2.20.1") // 카카오 로그인 API 모듈
+    implementation("com.kakao.sdk:v2-share:2.20.1") // 카카오톡 공유 API 모듈
+    implementation("com.kakao.sdk:v2-talk:2.20.1") // 카카오톡 채널, 카카오톡 소셜, 카카오톡 메시지 API 모듈
+    implementation("com.kakao.sdk:v2-cert:2.20.1") // 카카오톡 인증 서비스 API 모듈
 }
