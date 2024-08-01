@@ -7,14 +7,17 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.androidsample.data.model.Todo
+import com.example.androidsample.domain.repository.LoginRepository
 import com.example.androidsample.domain.repository.TodoRepository
+import com.kakao.sdk.auth.model.OAuthToken
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class TodoViewModel @Inject constructor(
-    private val todoRepository: TodoRepository
+    private val todoRepository: TodoRepository,
+    private val loginRepository: LoginRepository
 ) : ViewModel() {
     private val _items = mutableStateOf(emptyList<Todo>())
     val items: State<List<Todo>> = _items
@@ -63,6 +66,12 @@ class TodoViewModel @Inject constructor(
             // elvis 연산자 사용 return@launch 라고 하면 viewModelScope에 있었던 @launch가 취소된다.
             todoRepository.addTodo(recentlyDeleteTodo ?: return@launch)
             recentlyDeleteTodo = null
+        }
+    }
+
+    fun createKakaoToken() {
+        viewModelScope.launch {
+            loginRepository.createKakaoToken()
         }
     }
 }
